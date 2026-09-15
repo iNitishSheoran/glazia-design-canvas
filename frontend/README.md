@@ -1,16 +1,35 @@
-# React + Vite
+# Forme - Full-Stack Design Canvas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-stack visual design canvas application built with the MERN stack and React Konva. Forme allows users to create, edit, save, and manage custom design projects with a highly interactive workspace.
 
-Currently, two official plugins are available:
+**Live Frontend:** [View on Vercel](https://glazia-design-canvas.vercel.app) 
+**Live Backend API:** [View on Render](https://glazia-design-canvas.onrender.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Features
 
-## React Compiler
+* **Interactive Canvas:** Draw, resize, rotate, and drag shapes (Rectangles, Circles, Lines, Text) using React Konva.
+* **Layer Management:** Bring shapes to the front or send them to the back of the canvas.
+* **History Control:** Full Undo and Redo functionality.
+* **Real-time Properties:** Edit colors, dimensions, coordinates, and typography via a dynamic properties panel.
+* **Authentication:** Secure user login and registration using JWT (JSON Web Tokens).
+* **Cloud Storage:** Autosave capabilities and permanent storage of canvases in MongoDB.
+* **Export:** Instantly export your canvas designs as PNG files.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💻 Tech Stack
 
-## Expanding the ESLint configuration
+* **Frontend:** React, Vite, Tailwind CSS, React Konva, Axios, Lucide React
+* **Backend:** Node.js, Express.js, MongoDB, Mongoose, JSON Web Tokens (JWT), bcryptjs
+* **Deployment:** Vercel (Frontend) & Render (Backend)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 Monorepo Structure
+
+This project is organized as a monorepo:
+* `/frontend` - Contains the Vite/React frontend application.
+* `/backend` - Contains the Node/Express API and database models.
+
+## 🚀 Quick Start (Run Locally)
+
+**1. Clone the repository**
+```bash
+git clone [https://github.com/YOUR_USERNAME/glazia-design-canvas.git](https://github.com/YOUR_USERNAME/glazia-design-canvas.git)
+cd glazia-design-canvas
