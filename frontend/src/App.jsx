@@ -30,29 +30,29 @@ export default function App() {
     try {
       const endpoint = isLogin ? '/auth/login' : '/auth/register';
       const res = await axios.post(`${API_URL}${endpoint}`, { username, password });
-      
+
       if (isLogin) {
         setToken(res.data.token);
         localStorage.setItem('token', res.data.token);
-        setUsername(''); 
+        setUsername('');
         setPassword('');
       } else {
         showModal('Success', 'Account created successfully! You can now log in.', () => setIsLogin(true));
       }
-    } catch (error) { 
-      showModal('Error', error.response?.data?.message || 'Authentication failed', () => {});
+    } catch (error) {
+      showModal('Error', error.response?.data?.message || 'Authentication failed', () => { });
     }
   };
 
   const logout = () => {
     showModal('Logout', 'Are you sure you want to log out?', () => {
-      setToken(null); 
+      setToken(null);
       localStorage.removeItem('token');
-      setElements([]); 
-      setCanvasId(null); 
-      setHistory([[]]); 
+      setElements([]);
+      setCanvasId(null);
+      setHistory([[]]);
       setHistoryStep(0);
-    }, () => {}, 'Logout');
+    }, () => { }, 'Logout');
   };
 
   const authHeaders = { headers: { Authorization: `Bearer ${token}` } };
@@ -62,26 +62,26 @@ export default function App() {
     try {
       const res = await axios.get(`${API_URL}/canvases`, authHeaders);
       setSavedCanvases(res.data);
-    } catch (error) {}
+    } catch (error) { }
   }, [token]);
 
-  useEffect(() => { 
-    fetchAllCanvases(); 
+  useEffect(() => {
+    fetchAllCanvases();
   }, [fetchAllCanvases]);
 
   const saveCanvas = async (isAuto = false) => {
     try {
       if (canvasId) {
         await axios.put(`${API_URL}/canvases/${canvasId}`, { elements }, authHeaders);
-        if (!isAuto) showModal('Saved', 'Your canvas has been updated successfully.', () => {});
+        if (!isAuto) showModal('Saved', 'Your canvas has been updated successfully.', () => { });
       } else {
         const res = await axios.post(`${API_URL}/canvases`, { title: `Canvas ${savedCanvases.length + 1}`, elements }, authHeaders);
         setCanvasId(res.data._id);
-        if (!isAuto) showModal('Saved', 'New canvas created and saved.', () => {});
+        if (!isAuto) showModal('Saved', 'New canvas created and saved.', () => { });
       }
       fetchAllCanvases();
-    } catch (error) { 
-      if (!isAuto) showModal('Error', 'Failed to save the canvas.', () => {});
+    } catch (error) {
+      if (!isAuto) showModal('Error', 'Failed to save the canvas.', () => { });
     }
   };
 
@@ -93,9 +93,13 @@ export default function App() {
 
   const addElement = (type) => {
     const newEl = {
-      id: Date.now().toString(), 
-      type, x: 200, y: 200, width: 120, height: 120, 
-      fill: type === 'text' ? '#D83CF0' : '#4f82f2', 
+      id: Date.now().toString(),
+      type,
+      x: 200,
+      y: 200,
+      width: type === 'rect' ? 180 : 120,
+      height: type === 'rect' ? 100 : 120,
+      fill: type === 'text' ? '#D83CF0' : '#4f82f2',
       rotation: 0,
       text: type === 'text' ? 'Double click to edit' : undefined
     };
@@ -131,8 +135,8 @@ export default function App() {
     const link = document.createElement('a');
     link.download = 'canvas-export.png';
     link.href = uri;
-    document.body.appendChild(link); 
-    link.click(); 
+    document.body.appendChild(link);
+    link.click();
     document.body.removeChild(link);
   };
 
@@ -140,27 +144,27 @@ export default function App() {
     showModal('Delete Canvas', 'Are you sure you want to permanently delete this canvas?', async () => {
       try {
         await axios.delete(`${API_URL}/canvases/${canvasId}`, authHeaders);
-        setCanvasId(null); 
-        setElements([]); 
+        setCanvasId(null);
+        setElements([]);
         fetchAllCanvases();
-      } catch (error) { 
-        showModal('Error', 'Failed to delete canvas', () => {}); 
+      } catch (error) {
+        showModal('Error', 'Failed to delete canvas', () => { });
       }
-    }, () => {}, 'Delete');
+    }, () => { }, 'Delete');
   };
 
   const handleCanvasLoad = (e) => {
     const id = e.target.value;
-    if (!id) { 
-      setCanvasId(null); 
-      setElements([]); 
-      updateElementsAndHistory([]); 
-      return; 
+    if (!id) {
+      setCanvasId(null);
+      setElements([]);
+      updateElementsAndHistory([]);
+      return;
     }
     const c = savedCanvases.find((can) => can._id === id);
-    if (c) { 
-      setCanvasId(c._id); 
-      updateElementsAndHistory(c.elements); 
+    if (c) {
+      setCanvasId(c._id);
+      updateElementsAndHistory(c.elements);
     }
   };
 
@@ -171,14 +175,14 @@ export default function App() {
     return (
       <div className="flex h-screen w-screen bg-[#f8f9fc] justify-center items-center font-sans text-slate-800">
         <CustomModal {...modal} />
-        <LoginForm 
-          handleAuth={handleAuth} 
-          isLogin={isLogin} 
-          setIsLogin={setIsLogin} 
-          username={username} 
-          setUsername={setUsername} 
-          password={password} 
-          setPassword={setPassword} 
+        <LoginForm
+          handleAuth={handleAuth}
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
         />
       </div>
     );
@@ -187,49 +191,49 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen w-screen bg-[#f8f9fa] font-sans text-[#1a202c] overflow-hidden">
       <CustomModal {...modal} />
-      
-      <TopNav 
-        activeCanvasInfo={activeCanvasInfo} 
-        handleUndo={handleUndo} 
-        handleRedo={handleRedo} 
-        historyStep={historyStep} 
-        historyLength={history.length} 
-        logout={logout} 
+
+      <TopNav
+        activeCanvasInfo={activeCanvasInfo}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
+        historyStep={historyStep}
+        historyLength={history.length}
+        logout={logout}
       />
 
       <div className="flex flex-1 overflow-hidden">
-        <LeftSidebar 
-          setSelectedId={setSelectedId} 
-          addElement={addElement} 
-          saveCanvas={saveCanvas} 
-          exportPNG={exportPNG} 
-          savedCanvases={savedCanvases} 
-          canvasId={canvasId} 
-          handleCanvasLoad={handleCanvasLoad} 
-          handleDeleteCanvas={handleDeleteCanvas} 
+        <LeftSidebar
+          setSelectedId={setSelectedId}
+          addElement={addElement}
+          saveCanvas={saveCanvas}
+          exportPNG={exportPNG}
+          savedCanvases={savedCanvases}
+          canvasId={canvasId}
+          handleCanvasLoad={handleCanvasLoad}
+          handleDeleteCanvas={handleDeleteCanvas}
         />
 
         <main className="flex-1 relative flex flex-col min-w-0">
           <div className="h-12 flex items-center px-6 justify-between text-[13px] text-gray-500 shrink-0 border-b border-gray-200/50 bg-[#f8f9fa]">
             <div>Projects <span className="mx-2">›</span> <span className="font-semibold text-gray-800">{activeCanvasInfo ? activeCanvasInfo.title : 'Untitled project'}</span></div>
           </div>
-          
+
           <div className="flex-1 overflow-auto bg-[#f8f9fa] flex items-center justify-center p-8 relative">
-            <CanvasArea 
-              elements={elements} 
-              setElements={updateElementsAndHistory} 
-              selectedId={selectedId} 
-              setSelectedId={setSelectedId} 
-              stageRef={stageRef} 
+            <CanvasArea
+              elements={elements}
+              setElements={updateElementsAndHistory}
+              selectedId={selectedId}
+              setSelectedId={setSelectedId}
+              stageRef={stageRef}
             />
           </div>
         </main>
 
-        <RightSidebar 
-          selectedElement={selectedElement} 
-          moveLayer={moveLayer} 
-          updateProperty={updateProperty} 
-          deleteSelected={deleteSelected} 
+        <RightSidebar
+          selectedElement={selectedElement}
+          moveLayer={moveLayer}
+          updateProperty={updateProperty}
+          deleteSelected={deleteSelected}
         />
       </div>
     </div>

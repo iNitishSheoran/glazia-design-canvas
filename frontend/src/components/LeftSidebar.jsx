@@ -26,10 +26,7 @@ export default function LeftSidebar({ setSelectedId, addElement, saveCanvas, exp
           <button className="flex items-center gap-3 w-full p-2.5 rounded-lg text-gray-600 hover:bg-gray-50 text-[15px]" onClick={() => addElement('text')}>
             <Type size={18} /> Text
           </button>
-          
-          <button className="flex items-center gap-3 w-full p-2.5 rounded-lg text-gray-600 hover:bg-gray-50 text-[15px]" onClick={() => addElement('line')}>
-            <Minus size={18} /> Line
-          </button>
+        
         </div>
       </div>
 
