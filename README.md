@@ -1,22 +1,35 @@
-# Forme - Frontend App
+# Forme - Full-Stack Design Canvas
 
-This is the frontend client for the Forme design canvas, built using React, Vite, Tailwind CSS, and React Konva.
+A modern, full-stack visual design canvas application built with the MERN stack and React Konva. Forme allows users to create, edit, save, and manage custom design projects with a highly interactive workspace.
 
-## 🛠️ Local Development
+**Live Frontend:** [View on Vercel](https://glazia-design-canvas.vercel.app/) 
+**Live Backend API:** [View on Render](https://glazia-design-canvas.onrender.com)
 
-1. Install dependencies:
-   `npm install`
-2. Create a `.env` file in the root of the `frontend` directory:
-   `VITE_API_URL=http://localhost:5000/api`
-3. Start the development server:
-   `npm run dev`
+## 🌟 Features
 
-## 📜 Available Scripts
+* **Interactive Canvas:** Draw, resize, rotate, and drag shapes (Rectangles, Circles, Lines, Text) using React Konva.
+* **Layer Management:** Bring shapes to the front or send them to the back of the canvas.
+* **History Control:** Full Undo and Redo functionality.
+* **Real-time Properties:** Edit colors, dimensions, coordinates, and typography via a dynamic properties panel.
+* **Authentication:** Secure user login and registration using JWT (JSON Web Tokens).
+* **Cloud Storage:** Autosave capabilities and permanent storage of canvases in MongoDB.
+* **Export:** Instantly export your canvas designs as PNG files.
 
-* `npm run dev` - Starts the Vite development server.
-* `npm run build` - Builds the app for production into the `dist` folder.
-* `npm run preview` - Previews the production build locally.
+## 💻 Tech Stack
 
-## 🌐 Deployment
+* **Frontend:** React, Vite, Tailwind CSS, React Konva, Axios, Lucide React
+* **Backend:** Node.js, Express.js, MongoDB, Mongoose, JSON Web Tokens (JWT), bcryptjs
+* **Deployment:** Vercel (Frontend) & Render (Backend)
 
-This frontend is configured for deployment on Vercel. Ensure that you set the `Root Directory` to `frontend` and add the `VITE_API_URL` environment variable pointing to your live backend in the Vercel dashboard.
+## 📂 Monorepo Structure
+
+This project is organized as a monorepo:
+* `/frontend` - Contains the Vite/React frontend application.
+* `/backend` - Contains the Node/Express API and database models.
+
+## 🚀 Quick Start (Run Locally)
+
+**1. Clone the repository**
+```bash
+git clone [https://github.com/YOUR_USERNAME/glazia-design-canvas.git](https://github.com/YOUR_USERNAME/glazia-design-canvas.git)
+cd glazia-design-canvas
