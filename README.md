@@ -2,7 +2,7 @@
 
 A modern, full-stack visual design canvas application built with the MERN stack and React Konva. Forme allows users to create, edit, save, and manage custom design projects with a highly interactive workspace.
 
-**Live Frontend:** [View on Vercel](https://glazia-design-canvas.vercel.app/) *(Update this link to your actual Vercel URL)*  
+**Live Frontend:** [View on Vercel](https://glazia-design-canvas.vercel.app/) 
 **Live Backend API:** [View on Render](https://glazia-design-canvas.onrender.com)
 
 ## 🌟 Features
